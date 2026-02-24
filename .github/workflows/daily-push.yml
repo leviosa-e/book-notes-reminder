@@ -1,6 +1,9 @@
 name: Daily Book Notes Push
 
 on:
+  push:
+    branches:
+      - master
   schedule:
     # 每天北京时间上午 08:30 (UTC 00:30)
     - cron: '30 0 * * *'
