@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+daily-selection.md
+daily-subject.txt
+.env
+dist/
+*.log

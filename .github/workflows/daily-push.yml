@@ -1,0 +1,44 @@
+name: Daily Book Notes Push
+
+on:
+  schedule:
+    # 每天北京时间上午 08:30 (UTC 00:30)
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  push-notes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Pick Daily Notes
+        id: pick
+        run: |
+          npx tsx scripts/pick-notes.ts
+          echo "MAIL_SUBJECT=$(cat daily-subject.txt)" >> $GITHUB_ENV
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.qq.com
+          server_port: 465
+          username: ${{ secrets.QQMAIL_USERNAME }}
+          password: ${{ secrets.QQMAIL_PASSWORD }}
+          subject: ${{ env.MAIL_SUBJECT }}
+          to: ${{ secrets.QQMAIL_USERNAME }}
+          from: Book Notes Reminder
+          body: file://daily-selection.md
+          convert_markdown: true
