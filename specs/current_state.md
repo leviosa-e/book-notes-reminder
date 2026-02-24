@@ -16,6 +16,7 @@ As of 2026-02-25, the following notes exist:
 9. `纳瓦尔宝典.md`
 10. `金字塔原理.md` - (Structured, methodology-heavy)
 
-## Current Issues
-- **Inconsistent Formatting**: Some files start with titles, some with summaries, some are just bullet points.
-- **No Metadata**: Hard to categorize or filter notes.
+## Maintenance Standards
+- **Standardized Template**: All notes should follow the structure defined in `note-template.md`.
+- **Content Preservation**: When converting or creating notes, the "Detailed Notes" (`## 详细笔记`) section **must preserve the original content in full**. Summarization or deletion of original details is prohibited to ensure high-fidelity review.
+- **Header Adjustment**: During template migration, existing headers should be downgraded (e.g., `#` to `###`) to fit under the "Detailed Notes" section without losing hierarchy.
